@@ -40,6 +40,7 @@
 
         <RadioGroup
             style="@style/RadioGroupAnswers"
+            android:id="@+id/q1_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -376,7 +377,7 @@
                 android:textSize="50sp" />
 
             <EditText
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:imeOptions="actionDone"
                 android:inputType="number" />
@@ -385,8 +386,9 @@
         
         <Button
             android:layout_width="wrap_content"
-            android:onClick="generateOperands"
-
+            android:onClick="checkAnswers"
+            android:text="Submit Answers"
+            android:layout_gravity="center"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
