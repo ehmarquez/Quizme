@@ -1,5 +1,6 @@
 package com.example.alvin.quizme;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // Use correctAnswer to keep track of how many correct answers
         // Use totalScore for maximum possible score
         int correctAnswer = 0;
-        int totalScore = 0;
+        String totalScore = "6";
 
         // Check Q1 which is a radio group
         RadioGroup selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
@@ -134,8 +136,7 @@ public class MainActivity extends AppCompatActivity {
         boolean selectedBox3 = thirdOptionQ5.isChecked();
         boolean selectedBox4 = fourthOptionQ5.isChecked();
 
-        if (selectedBox2 == true && selectedBox4 == true && selectedBox1 == false
-                && selectedBox3 == false) {
+        if (selectedBox2 && selectedBox4 && !selectedBox1 && !selectedBox3) {
             correctAnswer += 1;
         }
 
@@ -151,11 +152,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         catch (NumberFormatException e) {
-            Log.v("checkAnswers", "Q6 answer was left blank!");
+            Log.v("checkAnswers", "Q6 answer was left blank! Don't crash!");
         }
 
+        // Making toast for the final score
+        Context context = getApplicationContext();
+        CharSequence finalScore = Integer.toString(correctAnswer) + " out of " + totalScore;
+        int scoreToastDuration = Toast.LENGTH_SHORT;
 
-        Log.v("CheckAnswers", "correctAnswer count is: " + correctAnswer);
+        Toast.makeText(context, finalScore, scoreToastDuration).show();
 
     }
 
