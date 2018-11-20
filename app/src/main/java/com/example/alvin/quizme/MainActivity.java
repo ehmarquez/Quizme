@@ -3,6 +3,8 @@ package com.example.alvin.quizme;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,8 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Generate random operands for math problem in Q6
         generateOperands();
     }
+
+    // Initialize variables
+    int operand_1; //operand used for Q6
+    int operand_2; // operand used for Q6
 
     /**
      *  This method displays a number for the 1st operand of a math problem,
@@ -41,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayOperand2(int number) {
         TextView operandTextView = (TextView) findViewById(R.id.q6_operand_2);
-        operandTextView.setText(" " + number);
+        operandTextView.setText(number + " = ");
     }
 
     /**
@@ -54,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Random rng = new Random();
 
         // Call rng object and create random number
-        int operand_1 = rng.nextInt(6);
-        int operand_2 = rng.nextInt(6);
+        operand_1 = rng.nextInt(6);
+        operand_2 = rng.nextInt(6);
 
         // Display the 2 random operands for final question
         displayOperand1(operand_1);
@@ -68,34 +75,87 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void checkAnswers(View view) {
-        // Check answer, RadioGroup only allows 1 checked so just check for
-        // 1 radio button
-        RadioGroup selectedRadioButton = (RadioGroup) findViewById(R.id.q1_radio_group);
-        Log.v("CheckAnswers", "Selected answer is:"
-                + selectedRadioButton.getCheckedRadioButtonId());
-
-        RadioButton correctRadioButton = (RadioButton) findViewById(R.id.q1_option1);
-        Log.v("CheckAnswers", "Correct answer is:"
-                + correctRadioButton.getId());
+        // Use correctAnswer to keep track of how many correct answers
+        // Use totalScore for maximum possible score
+        int correctAnswer = 0;
+        int totalScore = 0;
 
         // Check Q1 which is a radio group
-    }
+        RadioGroup selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        RadioButton correctRadioButtonQ1 = (RadioButton) findViewById(R.id.q1_option1);
 
-     /**
-     * Checks submitted answers when user clicks Submit Answers button
-     *
-     * @param selectedChoice
-     */
+        int selectedChoiceQ1 = selectedRadioButtonQ1.getCheckedRadioButtonId();
+        int correctChoiceQ1 = correctRadioButtonQ1.getId();
 
-    private void checkRadioAnswers(int selectedChoice, int correctChoice) {
-        // Check answers for radio group style questions with only 1 allowed selection
-        RadioGroup selectedRadioButton = (RadioGroup) findViewById(R.id.q1_radio_group);
-        Log.v("CheckAnswers", "Selected answer is:"
-                + selectedRadioButton.getCheckedRadioButtonId());
+        if (selectedChoiceQ1 == correctChoiceQ1) {
+            correctAnswer += 1;
+        }
 
-        RadioButton correctRadioButton = (RadioButton) findViewById(R.id.q1_option1);
-        Log.v("CheckAnswers", "Correct answer is:"
-                + correctRadioButton.getId());
+        //Check Q2 which is a radio group
+        RadioGroup selectedRadioButtonQ2 = (RadioGroup) findViewById(R.id.q2_radio_group);
+        RadioButton correctRadioButtonQ2 = (RadioButton) findViewById(R.id.q2_option3);
+
+        int selectedChoiceQ2 = selectedRadioButtonQ2.getCheckedRadioButtonId();
+        int correctChoiceQ2 = correctRadioButtonQ2.getId();
+
+        if (selectedChoiceQ2 == correctChoiceQ2) {
+            correctAnswer += 1;
+        }
+
+        //Check Q3 which is a radio group
+        RadioGroup selectedRadioButtonQ3 = (RadioGroup) findViewById(R.id.q3_radio_group);
+        RadioButton correctRadioButtonQ3 = (RadioButton) findViewById(R.id.q3_option2);
+
+        int selectedChoiceQ3 = selectedRadioButtonQ3.getCheckedRadioButtonId();
+        int correctChoiceQ3 = correctRadioButtonQ3.getId();
+        if (selectedChoiceQ3 == correctChoiceQ3) {
+            correctAnswer += 1;
+        }
+
+        //Check Q4 which is a radio group
+        RadioGroup selectedRadioButtonQ4 = (RadioGroup) findViewById(R.id.q4_radio_group);
+        RadioButton correctRadioButtonQ4 = (RadioButton) findViewById(R.id.q4_option4);
+
+        int selectedChoiceQ4 = selectedRadioButtonQ4.getCheckedRadioButtonId();
+        int correctChoiceQ4 = correctRadioButtonQ4.getId();
+        if (selectedChoiceQ4 == correctChoiceQ4) {
+            correctAnswer += 1;
+        }
+
+        //Check Q5 which is a checkbox question with possible multiple answers
+
+        CheckBox firstOptionQ5 = (CheckBox) findViewById(R.id.q5_option1);
+        CheckBox secondOptionQ5 = (CheckBox) findViewById(R.id.q5_option2);
+        CheckBox thirdOptionQ5 = (CheckBox) findViewById(R.id.q5_option3);
+        CheckBox fourthOptionQ5 = (CheckBox) findViewById(R.id.q5_option4);
+
+        boolean selectedBox1 = firstOptionQ5.isChecked();
+        boolean selectedBox2 = secondOptionQ5.isChecked();
+        boolean selectedBox3 = thirdOptionQ5.isChecked();
+        boolean selectedBox4 = fourthOptionQ5.isChecked();
+
+        if (selectedBox2 == true && selectedBox4 == true && selectedBox1 == false
+                && selectedBox3 == false) {
+            correctAnswer += 1;
+        }
+
+        //Check Q6 which is an EditText number question
+
+        EditText userAnswerQ6 = (EditText) findViewById(R.id.q6_answer);
+
+        //Check if number exists in EditText field and calculate score accordingly
+        try {
+            int userAnswer = Integer.parseInt(userAnswerQ6.getText().toString());
+            if (userAnswer == (operand_1 + operand_2)) {
+                correctAnswer += 1;
+            }
+        }
+        catch (NumberFormatException e) {
+            Log.v("checkAnswers", "Q6 answer was left blank!");
+        }
+
+
+        Log.v("CheckAnswers", "correctAnswer count is: " + correctAnswer);
 
     }
 
