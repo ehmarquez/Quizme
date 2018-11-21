@@ -16,18 +16,52 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Initialize variables
+    private int operand_1; //operand used for Q6
+    private int operand_2; // operand used for Q6
+
+    // Use correctAnswer to keep track of how many correct answers
+    // Use totalScore for maximum possible score
+    private int correctAnswer = 0;
+    private String totalScore = "6";
+
+    private RadioGroup selectedRadioButtonQ1;
+    private RadioButton correctRadioButtonQ1;
+    private RadioGroup selectedRadioButtonQ2;
+    private RadioButton correctRadioButtonQ2;
+    private RadioGroup selectedRadioButtonQ3;
+    private RadioGroup correctRadioButtonQ3;
+    private RadioGroup selectedRadioButtonQ4;
+    private RadioGroup correctRadioButtonQ4;
+    private RadioGroup selectedRadioButtonQ5;
+    private RadioGroup correctRadioButtonQ5;
+    private RadioGroup selectedRadioButtonQ6;
+    private RadioGroup correctRadioButtonQ6;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Declare views needed for the questions
+        selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        correctRadioButtonQ1 = (RadioButton) findViewById(R.id.q1_option1);
+        selectedRadioButtonQ2 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        correctRadioButtonQ2 = (RadioButton) findViewById(R.id.q1_option1);
+        selectedRadioButtonQ3 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        correctRadioButtonQ3 = (RadioButton) findViewById(R.id.q1_option1);
+        selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        correctRadioButtonQ1 = (RadioButton) findViewById(R.id.q1_option1);
+        selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
+        correctRadioButtonQ1 = (RadioButton) findViewById(R.id.q1_option1);
+
+
+
         // Generate random operands for math problem in Q6
         generateOperands();
     }
 
-    // Initialize variables
-    int operand_1; //operand used for Q6
-    int operand_2; // operand used for Q6
 
     /**
      *  This method displays a number for the 1st operand of a math problem,
@@ -70,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         displayOperand1(operand_1);
         displayOperand2(operand_2);
     }
+
     /**
      * Checks submitted answers when user clicks Submit Answers button
      *
@@ -77,52 +112,11 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void checkAnswers(View view) {
-        // Use correctAnswer to keep track of how many correct answers
-        // Use totalScore for maximum possible score
-        int correctAnswer = 0;
-        String totalScore = "6";
 
-        // Check Q1 which is a radio group
-        RadioGroup selectedRadioButtonQ1 = (RadioGroup) findViewById(R.id.q1_radio_group);
-        RadioButton correctRadioButtonQ1 = (RadioButton) findViewById(R.id.q1_option1);
-
-        int selectedChoiceQ1 = selectedRadioButtonQ1.getCheckedRadioButtonId();
-        int correctChoiceQ1 = correctRadioButtonQ1.getId();
-
-        if (selectedChoiceQ1 == correctChoiceQ1) {
-            correctAnswer += 1;
-        }
-
-        //Check Q2 which is a radio group
-        RadioGroup selectedRadioButtonQ2 = (RadioGroup) findViewById(R.id.q2_radio_group);
-        RadioButton correctRadioButtonQ2 = (RadioButton) findViewById(R.id.q2_option3);
-
-        int selectedChoiceQ2 = selectedRadioButtonQ2.getCheckedRadioButtonId();
-        int correctChoiceQ2 = correctRadioButtonQ2.getId();
-
-        if (selectedChoiceQ2 == correctChoiceQ2) {
-            correctAnswer += 1;
-        }
-
-        //Check Q3 which is a radio group
-        RadioGroup selectedRadioButtonQ3 = (RadioGroup) findViewById(R.id.q3_radio_group);
-        RadioButton correctRadioButtonQ3 = (RadioButton) findViewById(R.id.q3_option2);
-
-        int selectedChoiceQ3 = selectedRadioButtonQ3.getCheckedRadioButtonId();
-        int correctChoiceQ3 = correctRadioButtonQ3.getId();
-        if (selectedChoiceQ3 == correctChoiceQ3) {
-            correctAnswer += 1;
-        }
-
-        //Check Q4 which is a radio group
-        RadioGroup selectedRadioButtonQ4 = (RadioGroup) findViewById(R.id.q4_radio_group);
-        RadioButton correctRadioButtonQ4 = (RadioButton) findViewById(R.id.q4_option4);
-
-        int selectedChoiceQ4 = selectedRadioButtonQ4.getCheckedRadioButtonId();
-        int correctChoiceQ4 = correctRadioButtonQ4.getId();
-        if (selectedChoiceQ4 == correctChoiceQ4) {
-            correctAnswer += 1;
-        }
+        checkQ1();
+        checkQ2();
+        checkQ3();
+        checkQ4();
 
         //Check Q5 which is a checkbox question with possible multiple answers
 
@@ -162,6 +156,89 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(context, finalScore, scoreToastDuration).show();
 
+    }
+    /**
+     * Checks answer for Q1
+     */
+
+    private void checkQ1() {
+        // Check Q1 which is a radio group
+        int selectedChoiceQ1 = selectedRadioButtonQ1.getCheckedRadioButtonId();
+        int correctChoiceQ1 = correctRadioButtonQ1.getId();
+
+        if (selectedChoiceQ1 == correctChoiceQ1) {
+            correctAnswer += 1;
+        }
+    }
+
+    /**
+     * Checks answer for Q2
+     */
+
+    private void checkQ2() {
+        // Check Q2 which is a radio group
+        int selectedChoiceQ2 = selectedRadioButtonQ2.getCheckedRadioButtonId();
+        int correctChoiceQ2 = correctRadioButtonQ2.getId();
+
+        if (selectedChoiceQ2 == correctChoiceQ2) {
+            correctAnswer += 1;
+        }
+    }
+
+    /**
+     * Checks answer for Q3
+     */
+
+    private void checkQ3() {
+        // Check Q3 which is a radio group
+        int selectedChoiceQ3 = selectedRadioButtonQ3.getCheckedRadioButtonId();
+        int correctChoiceQ3 = correctRadioButtonQ3.getId();
+
+        if (selectedChoiceQ3 == correctChoiceQ3) {
+            correctAnswer += 1;
+        }
+    }
+
+    /**
+     * Checks answer for Q4
+     */
+
+    private void checkQ4() {
+        // Check Q4 which is a radio group
+        int selectedChoiceQ4 = selectedRadioButtonQ4.getCheckedRadioButtonId();
+        int correctChoiceQ4 = correctRadioButtonQ4.getId();
+
+        if (selectedChoiceQ4 == correctChoiceQ4) {
+            correctAnswer += 1;
+        }
+    }
+
+    /**
+     * Checks answer for Q5
+     */
+
+    private void checkQ5() {
+        // Check Q5 which is a radio group
+        int selectedChoiceQ5 = selectedRadioButtonQ5.getCheckedRadioButtonId();
+        int correctChoiceQ5 = correctRadioButtonQ5.getId();
+
+        if (selectedChoiceQ5 == correctChoiceQ5) {
+            correctAnswer += 1;
+        }
+    }
+
+    /**
+     * Checks answer for Q6
+     */
+
+    private void checkQ6() {
+        // Check Q6 which is a radio group
+        int selectedChoiceQ6 = selectedRadioButtonQ6.getCheckedRadioButtonId();
+        int correctChoiceQ6 = correctRadioButtonQ6.getId();
+
+        if (selectedChoiceQ6 == correctChoiceQ6) {
+            correctAnswer += 1;
+        }
     }
 
 }
