@@ -38,4 +38,5 @@
     <string name="q5_wrong_2">House</string>
     <string name="q5_answer2">Human</string>
     <string name="q6_operator_choice">\u0020+\u0020</string>
+    <string name="answerBlankQ6">Q6 answer was left blank! Don\'t crash!</string>
 </resources>
